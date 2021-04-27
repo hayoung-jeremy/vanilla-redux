@@ -1,28 +1,19 @@
+import { createStore } from "redux";
+// store : data 저장소, state (data that changes) 저장소
+
 const add = document.getElementById("add");
 const minus = document.getElementById("minus");
 const number = document.getElementById("number");
 
-let count = 0;
-number.innerText = count;
-
-// updating the count value (which is changed below)
-const updateText = () => {
-  number.innerText = count;
+// 2) create reducer : function that modifies the data in the store (only this function can)
+// state = 0 : initial state value 설정
+const countModifier = (state = 0) => {
+  // return 하는것이 곧 data가 됨
+  console.log(state);
+  return state;
 };
 
-// changing the count value
-const handleAdd = () => {
-  count = count + 1;
-  console.log(count);
-  // update the changed count value
-  updateText();
-};
-const handleMinus = () => {
-  count = count - 1;
-  console.log(count);
-  // update the changed count value
-  updateText();
-};
+// 1) create store
+const countStore = createStore(countModifier);
 
-add.addEventListener("click", handleAdd);
-minus.addEventListener("click", handleMinus);
+// console.log(countStore.getState) // --> state : reducer 가 return 하는 값, 즉 변화시킨 data 값을 가져옴
