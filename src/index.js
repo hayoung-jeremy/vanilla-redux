@@ -31,6 +31,7 @@ const onChange = () => {
 };
 
 // 4) subscribe : store의 data 변화를 알아낼수 있게 해준다
+// store 에 저장된 data에 변화가 생길때마다 감지해서 ()안의 function 실행해줌
 countStore.subscribe(onChange);
 
 // 3) dipatch() 를 사용하여 action을 만들 수 있음 () 는 항상 object여야함
