@@ -11,7 +11,10 @@ const reducer = (state = [], action) => {
   console.log(action);
   switch (action.type) {
     case ADD_TODO:
-      return [];
+      // return state.push(action.text) : redux에서 이렇게 직접 데이터를 변경할 수는 없다
+      // old[]의 contents 를 가져와서 new contents와 함께 new array 에 넣는다.
+      // 만약 빈 input.value 를 가져왔을 경우엔 원래 state 를, 내용이 입력되었을 경우에만 업데이트된 state을 반환한다.
+      return action.text !== "" ? [...state, { text: action.text }] : state;
     case DELETE_TODO:
       return [];
     default:
@@ -21,11 +24,17 @@ const reducer = (state = [], action) => {
 
 const store = createStore(reducer);
 
+store.subscribe(() => console.log(store.getState()));
+
+const addToDo = (text) => {
+  store.dispatch({ type: ADD_TODO, text });
+};
+
 const onSubmit = (e) => {
   e.preventDefault();
   const toDo = input.value;
   input.value = "";
-  store.dispatch({ type: ADD_TODO, text: toDo });
+  addToDo(toDo);
 };
 
 form.addEventListener("submit", onSubmit);
