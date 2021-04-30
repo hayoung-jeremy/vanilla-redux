@@ -28,6 +28,18 @@ const store = createStore(reducer);
 
 store.subscribe(() => console.log(store.getState()));
 
+const paintToDos = () => {
+  const toDos = store.getState();
+  toDos.forEach((toDo) => {
+    const li = document.createElement("li");
+    li.id = toDo.liId;
+    li.innerText = toDo.text;
+    ul.appendChild(li);
+  });
+};
+
+store.subscribe(paintToDos);
+
 const addToDo = (text, liId) => {
   store.dispatch({ type: ADD_TODO, text, liId });
 };
