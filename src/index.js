@@ -30,6 +30,9 @@ store.subscribe(() => console.log(store.getState()));
 
 const paintToDos = () => {
   const toDos = store.getState();
+  // 상태를 가져오는데 그건 새로 업데이트된 li 하나만 있는게 아니라 전체 ul 목록임
+  // 그래서 계속해서 ul 이 painting 되기 때문에, 일단 ul을 비워두고 새 목록을 끼워넣음
+  ul.innerHTML = "";
   toDos.forEach((toDo) => {
     const li = document.createElement("li");
     li.id = toDo.liId;
@@ -50,7 +53,11 @@ const onSubmit = (e) => {
   input.value = "";
   // 제출 시 해당 to do list에 새 아이디 부여
   const liId = Date.now();
-  addToDo(toDo, liId);
+
+  // 빈 input.value 가 아닐때만 제출
+  if (toDo !== "") {
+    addToDo(toDo, liId);
+  }
 };
 
 form.addEventListener("submit", onSubmit);
