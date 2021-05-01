@@ -9,7 +9,6 @@ function Home() {
   function onSubmit(e) {
     e.preventDefault();
     setText("");
-    console.log(text);
   }
 
   return (
