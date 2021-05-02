@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 
 function Home() {
   const [text, setText] = useState("");
@@ -23,4 +24,10 @@ function Home() {
   );
 }
 
-export default Home;
+// mapStateToProps (state from store.js, ownProps from Component)
+function getCurrentState(state, ownProps) {
+  console.log(state, ownProps);
+}
+
+// connect : connect (mapStateToProps)(Component)
+export default connect(getCurrentState)(Home);
