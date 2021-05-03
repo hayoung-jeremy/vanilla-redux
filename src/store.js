@@ -4,10 +4,11 @@ const ADD = "ADD";
 const DELETE = "DELETE";
 
 // actions :
-const addToDo = (text) => {
+const addToDo = (text, id) => {
   return {
     type: ADD,
     text,
+    id: Date.now(),
   };
 };
 const deleteToDo = (id) => {
@@ -18,12 +19,11 @@ const deleteToDo = (id) => {
 };
 
 const reducer = (state = [], action) => {
-  let ID = Date.now();
   switch (action.type) {
     case ADD:
-      return [...state, { text: action.text, id: ID }];
+      return [...state, { text: action.text, id: action.id }];
     case DELETE:
-      return state.filter((toDo) => toDo !== action.id);
+      return state.filter((toDo) => toDo.id !== action.id);
     default:
       return state;
   }
