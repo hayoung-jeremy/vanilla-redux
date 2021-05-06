@@ -1,5 +1,5 @@
 import { createStore } from "redux";
-import { createAction, createReducer } from "@reduxjs/toolkit";
+import { createAction, createReducer, configureStore } from "@reduxjs/toolkit";
 
 // actions :
 const addToDo = createAction("ADD");
@@ -30,7 +30,8 @@ const reducer = createReducer([], {
     state.filter((toDo) => toDo.id !== action.payload),
 });
 
-const store = createStore(reducer);
+// redux dev tools 를 사용하여 state, action, dispatch 등 여러가지를 확인할 수 있음
+const store = configureStore({ reducer });
 
 export const actionCreators = {
   addToDo,
